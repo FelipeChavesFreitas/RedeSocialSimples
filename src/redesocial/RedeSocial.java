@@ -1,3 +1,8 @@
+package redesocial;
+
+import conteudoredesocial.Perfil;
+import conteudoredesocial.Post;
+
 import java.util.*;
 
 public class RedeSocial {
@@ -90,7 +95,7 @@ public class RedeSocial {
         } else if (escolha.toLowerCase(Locale.ROOT).equals("p") || escolha.toLowerCase(Locale.ROOT).equals("postar")){
             Perfil.perfils[RedeSocial.j].perfilInfo();
             System.out.println("================");
-            Post.postar();
+            Post.postar(input);
         } else{
             Perfil.perfils[RedeSocial.j].perfilInfo();
             System.out.println("==========TIMELINE=========");
@@ -198,25 +203,25 @@ public class RedeSocial {
         String login = pegarInfo(input);
         int z = 1;
         for(RedeSocial.j = 0; j < Perfil.quantidadePerfils; j++){
-            if (login.equals(Perfil.perfils[j].login)){
+            if (login.equals(Perfil.perfils[j].getLogin())){
                 break;
             } else{
                 z++;
                 if(z>Perfil.quantidadePerfils){
-                    System.out.println("Perfil não encontrado :(");
+                    System.out.println("conteudoredesocial.Perfil não encontrado :(");
                     System.out.println("Por favor, tente novamente.");
                     login(input);
                 }
             }
         }
         if (Perfil.quantidadePerfils == 0){
-            System.out.println("Perfil não encontrado :(");
+            System.out.println("conteudoredesocial.Perfil não encontrado :(");
             System.out.println("Por favor, tente novamente.");
             login(input);
         }
         System.out.println("Digite seu senha: ");
         String senha = pegarInfo(input);
-        while (!senha.equals(Perfil.perfils[j].senha)){
+        while (!senha.equals(Perfil.perfils[j].getSenha())){
             System.out.println("Senha incorreta, digite novamente: ");
             senha = pegarInfo(input);
         }
@@ -224,13 +229,13 @@ public class RedeSocial {
         menuUsuario(input);
     }
 
-    static void cadastrar(Scanner input){
-        Perfil usuario = new Perfil();
+    public static void cadastrar(Scanner input){
+        Perfil usuario = new Perfil("nome", "login", "senha");
         Perfil.perfils[Perfil.quantidadePerfils++] = usuario;
         System.out.println("Digite seu nome completo: ");
-        usuario.nome = pegarInfo(input);
+        usuario.setNome(input);
         System.out.println("Digite um login: ");
-        usuario.login = pegarInfo(input);
+        usuario.setLogin(input);
         int c;
         int z = Perfil.quantidadePerfils-1;
         boolean passou = true;
@@ -238,7 +243,7 @@ public class RedeSocial {
             if(Perfil.quantidadePerfils ==1){
                 passou = true;
                 break;
-            }if (usuario.login.equals(Perfil.perfils[c].login) && !(c == z)) {
+            }if (usuario.getLogin().equals(Perfil.perfils[c].getLogin()) && !(c == z)) {
                 System.out.println("O login já existe :(\nTente criar uma conta novamente.");
                 passou = false;
                 break;
@@ -248,7 +253,7 @@ public class RedeSocial {
             cadastrar(input);
         }else{
             System.out.println("Digite uma senha: ");
-            usuario.senha = pegarInfo(input);
+            usuario.setSenha(input);
          }
     }
 

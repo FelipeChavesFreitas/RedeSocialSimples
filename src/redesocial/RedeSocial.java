@@ -2,6 +2,7 @@ package redesocial;
 
 import conteudoredesocial.Perfil;
 import conteudoredesocial.Post;
+import conteudoredesocial.Usuario;
 
 import java.util.*;
 
@@ -95,7 +96,7 @@ public class RedeSocial {
         } else if (escolha.toLowerCase(Locale.ROOT).equals("p") || escolha.toLowerCase(Locale.ROOT).equals("postar")){
             Perfil.perfils[RedeSocial.j].perfilInfo();
             System.out.println("================");
-            Post.postar(input);
+            Usuario.postar(input);
         } else{
             Perfil.perfils[RedeSocial.j].perfilInfo();
             System.out.println("==========TIMELINE=========");
